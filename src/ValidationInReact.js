@@ -1,12 +1,6 @@
 import React from "react";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
-
-class validationInReact extends React.Component {
+class ValidationInReact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,15 +9,15 @@ class validationInReact extends React.Component {
         email: "",
         password: "",
         confirmPassword: "",
-        mobile: ""
+        mobile: "",
       },
       errors: {
         firstName: "",
         email: "",
         password: "",
         mobile: "",
-        confirmPassword: ""
-      }
+        confirmPassword: "",
+      },
     };
   }
 
@@ -49,7 +43,11 @@ class validationInReact extends React.Component {
       case "mobile":
         if (!value || value.trim() === "") {
           return "Mobile number is Required";
-        } else if (!value.match(/^[6-9]\d{9}$/)) {
+        } else if (
+          !value.match(
+            /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+          )
+        ) {
           return "Enter a valid mobile number.";
         } else {
           return "";
@@ -58,7 +56,7 @@ class validationInReact extends React.Component {
         if (!value) {
           return "Password is Required";
         } else if (value.length < 8 || value.length > 15) {
-          return "Please fill at least 8 character";
+          return "Please fill at least 8 characters";
         } else if (!value.match(/[a-z]/g)) {
           return "Please enter at least lower character.";
         } else if (!value.match(/[A-Z]/g)) {
@@ -70,7 +68,7 @@ class validationInReact extends React.Component {
         }
       case "confirmPassword":
         if (!value) {
-          return "Confirm Password Required";
+          return "Confirm Password is Required";
         } else if (value !== fields.password) {
           return "New Password and Confirm Password Must be Same";
         } else {
@@ -86,12 +84,12 @@ class validationInReact extends React.Component {
     this.setState({
       errors: {
         ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value)
+        [e.target.name]: this.validate(e.target.name, e.target.value),
       },
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -114,7 +112,7 @@ class validationInReact extends React.Component {
         firstName: fields.firstName,
         email: fields.email,
         password: fields.password,
-        mobile: fields.mobile
+        mobile: fields.mobile,
       };
       window.alert("subit success", JSON.stringify(data));
     }
@@ -124,13 +122,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
               <div>
                 <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <select name="gender" id="gender_list">
                   <option value="select" checked>
                     select
                   </option>
@@ -170,7 +168,7 @@ class validationInReact extends React.Component {
               name="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="mobile"
+              placeholder="Mobile"
             />
             <div>
               <span className="text-danger">{errors.mobile}</span>
@@ -196,7 +194,7 @@ class validationInReact extends React.Component {
               name="confirmPassword"
               value={fields.confirmPassword}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="confirm Password"
+              placeholder="Confirm Password"
             />
             <div>
               <span className="text-danger">{errors.confirmPassword}</span>
@@ -218,4 +216,4 @@ class validationInReact extends React.Component {
     );
   }
 }
-export default validationInReact;
+export default ValidationInReact;
