@@ -1,28 +1,22 @@
 import React from "react";
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
-
 class validationInReact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       fields: {
-        firstName: "",
+        first_name: "",
         email: "",
         password: "",
-        confirmPassword: "",
+        confirm_password: "",
         mobile: ""
       },
       errors: {
-        firstName: "",
+        first_name: "",
         email: "",
         password: "",
         mobile: "",
-        confirmPassword: ""
+        confirm_password: ""
       }
     };
   }
@@ -30,15 +24,15 @@ class validationInReact extends React.Component {
   validate = (name, value) => {
     const { fields } = this.state;
     switch (name) {
-      case "firstName":
+      case "first_name":
         if (!value || (value.trim() === "") | (value.length < 2)) {
-          return "First name is Required";
+          return "First name is required";
         } else {
           return "";
         }
       case "email":
         if (!value) {
-          return "Email is Required";
+          return "Email is required";
         } else if (
           !value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
         ) {
@@ -48,7 +42,7 @@ class validationInReact extends React.Component {
         }
       case "mobile":
         if (!value || value.trim() === "") {
-          return "Mobile number is Required";
+          return "Mobile number is required";
         } else if (!value.match(/^[6-9]\d{9}$/)) {
           return "Enter a valid mobile number.";
         } else {
@@ -56,7 +50,7 @@ class validationInReact extends React.Component {
         }
       case "password":
         if (!value) {
-          return "Password is Required";
+          return "Password is required";
         } else if (value.length < 8 || value.length > 15) {
           return "Please fill at least 8 character";
         } else if (!value.match(/[a-z]/g)) {
@@ -68,11 +62,11 @@ class validationInReact extends React.Component {
         } else {
           return "";
         }
-      case "confirmPassword":
+      case "confirm_password":
         if (!value) {
-          return "Confirm Password Required";
+          return "Confirm password required";
         } else if (value !== fields.password) {
-          return "New Password and Confirm Password Must be Same";
+          return "New password and confirm password must be same";
         } else {
           return "";
         }
@@ -109,14 +103,14 @@ class validationInReact extends React.Component {
       this.setState({ errors: validationErrors });
       return;
     }
-    if (fields.firstName && fields.email && fields.password && fields.mobile) {
+    if (fields.first_name && fields.email && fields.password && fields.mobile) {
       const data = {
-        firstName: fields.firstName,
+        first_name: fields.first_name,
         email: fields.email,
         password: fields.password,
         mobile: fields.mobile
       };
-      window.alert("subit success", JSON.stringify(data));
+      window.alert("Submit success", JSON.stringify(data));
     }
   };
 
@@ -124,13 +118,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form name="form" className="contacts_form">
         <div className="border">
           <div>
             <div>
               <div>
-                <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <label htmlFor="gender">Choose a gender:</label>
+                <select name="gender" id="gender">
                   <option value="select" checked>
                     select
                   </option>
@@ -141,14 +135,14 @@ class validationInReact extends React.Component {
               <label>First name:</label>
               <input
                 type="text"
-                name="firstName"
-                value={fields.firstName}
+                name="first_name"
+                value={fields.first_name}
                 onChange={(event) => this.handleUserInput(event)}
                 placeholder="First Name"
               />
             </div>
             <div>
-              <span className="text-danger">{errors.firstName}</span>
+              <span className="text-danger">{errors.first_name}</span>
             </div>
           </div>
           <div>
@@ -158,7 +152,7 @@ class validationInReact extends React.Component {
               name="email"
               value={fields.email}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="Email Address"
+              placeholder="Email address"
             />
             <div>
               <span className="text-danger">{errors.email}</span>
@@ -170,7 +164,7 @@ class validationInReact extends React.Component {
               name="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="mobile"
+              placeholder="Mobile"
             />
             <div>
               <span className="text-danger">{errors.mobile}</span>
@@ -193,13 +187,13 @@ class validationInReact extends React.Component {
             <label>Confirm Password:</label>
             <input
               type="Password"
-              name="confirmPassword"
-              value={fields.confirmPassword}
+              name="confirm_password"
+              value={fields.confirm_password}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="confirm Password"
+              placeholder="Confirm password"
             />
             <div>
-              <span className="text-danger">{errors.confirmPassword}</span>
+              <span className="text-danger">{errors.confirm_password}</span>
             </div>
           </div>
         </div>
