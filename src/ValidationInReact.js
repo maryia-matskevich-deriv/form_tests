@@ -124,7 +124,7 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" role='form'>
         <div className="border">
           <div>
             <div>
