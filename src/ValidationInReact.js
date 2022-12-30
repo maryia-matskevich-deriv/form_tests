@@ -49,7 +49,7 @@ class validationInReact extends React.Component {
       case "mobile":
         if (!value || value.trim() === "") {
           return "Mobile number is Required";
-        } else if (!value.match(/^[6-9]\d{9}$/)) {
+        } else if (!value.match(/^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/)) {
           return "Enter a valid mobile number.";
         } else {
           return "";
@@ -124,13 +124,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
               <div>
                 <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <select name="gender" id="gender_list">
                   <option value="select" checked>
                     select
                   </option>
@@ -170,7 +170,7 @@ class validationInReact extends React.Component {
               name="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="mobile"
+              placeholder="Mobile"
             />
             <div>
               <span className="text-danger">{errors.mobile}</span>
@@ -196,7 +196,7 @@ class validationInReact extends React.Component {
               name="confirmPassword"
               value={fields.confirmPassword}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="confirm Password"
+              placeholder="Confirm Password"
             />
             <div>
               <span className="text-danger">{errors.confirmPassword}</span>
