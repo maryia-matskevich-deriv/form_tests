@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
 ];
 
 class validationInReact extends React.Component {
@@ -11,73 +11,73 @@ class validationInReact extends React.Component {
     super(props);
     this.state = {
       fields: {
-        firstName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        mobile: ""
+        firstName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        mobile: '',
       },
       errors: {
-        firstName: "",
-        email: "",
-        password: "",
-        mobile: "",
-        confirmPassword: ""
-      }
+        firstName: '',
+        email: '',
+        password: '',
+        mobile: '',
+        confirmPassword: '',
+      },
     };
   }
 
   validate = (name, value) => {
     const { fields } = this.state;
     switch (name) {
-      case "firstName":
-        if (!value || (value.trim() === "") | (value.length < 2)) {
-          return "First name is Required";
+      case 'firstName':
+        if (!value || (value.trim() === '') | (value.length < 2)) {
+          return 'First name is Required';
         } else {
-          return "";
+          return '';
         }
-      case "email":
+      case 'email':
         if (!value) {
-          return "Email is Required";
+          return 'Email is Required';
         } else if (
           !value.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
         ) {
-          return "Enter a valid email address";
+          return 'Enter a valid email address';
         } else {
-          return "";
+          return '';
         }
-      case "mobile":
-        if (!value || value.trim() === "") {
-          return "Mobile number is Required";
+      case 'mobile':
+        if (!value || value.trim() === '') {
+          return 'Mobile number is Required';
         } else if (!value.match(/^[6-9]\d{9}$/)) {
-          return "Enter a valid mobile number.";
+          return 'Enter a valid mobile number.';
         } else {
-          return "";
+          return '';
         }
-      case "password":
+      case 'password':
         if (!value) {
-          return "Password is Required";
+          return 'Password is Required';
         } else if (value.length < 8 || value.length > 15) {
-          return "Please fill at least 8 character";
+          return 'Please fill at least 8 character';
         } else if (!value.match(/[a-z]/g)) {
-          return "Please enter at least lower character.";
+          return 'Please enter at least lower character.';
         } else if (!value.match(/[A-Z]/g)) {
-          return "Please enter at least upper character.";
+          return 'Please enter at least upper character.';
         } else if (!value.match(/[0-9]/g)) {
-          return "Please enter at least one digit.";
+          return 'Please enter at least one digit.';
         } else {
-          return "";
+          return '';
         }
-      case "confirmPassword":
+      case 'confirmPassword':
         if (!value) {
-          return "Confirm Password Required";
+          return 'Confirm Password Required';
         } else if (value !== fields.password) {
-          return "New Password and Confirm Password Must be Same";
+          return 'New Password and Confirm Password Must be Same';
         } else {
-          return "";
+          return '';
         }
       default: {
-        return "";
+        return '';
       }
     }
   };
@@ -86,12 +86,12 @@ class validationInReact extends React.Component {
     this.setState({
       errors: {
         ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value)
+        [e.target.name]: this.validate(e.target.name, e.target.value),
       },
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -114,9 +114,9 @@ class validationInReact extends React.Component {
         firstName: fields.firstName,
         email: fields.email,
         password: fields.password,
-        mobile: fields.mobile
+        mobile: fields.mobile,
       };
-      window.alert("subit success", JSON.stringify(data));
+      window.alert('subit success', JSON.stringify(data));
     }
   };
 
@@ -124,89 +124,89 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
-        <div className="border">
+      <form className='contacts_form'>
+        <div className='border'>
           <div>
             <div>
               <div>
-                <label for="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
-                  <option value="male" checked>
+                <label htmlFor='gender_list'>Choose a gender:</label>
+                <select name='gender' id='cars'>
+                  <option value='select' checked>
                     select
                   </option>
-                  <option value="male">male</option>
-                  <option value="female">female</option>
+                  <option value='male'>male</option>
+                  <option value='female'>female</option>
                 </select>
               </div>
               <label>First name:</label>
               <input
-                type="text"
-                name="firstName"
+                type='text'
+                name='firstName'
                 value={fields.firstName}
                 onChange={(event) => this.handleUserInput(event)}
-                placeholder="First Name"
+                placeholder='First Name'
               />
             </div>
             <div>
-              <span className="text-danger">{errors.firstName}</span>
+              <span className='text-danger'>{errors.firstName}</span>
             </div>
           </div>
           <div>
             <label>Email:</label>
             <input
-              type="email"
-              name="email"
+              type='email'
+              name='email'
               value={fields.email}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="Email Address"
+              placeholder='Email Address'
             />
             <div>
-              <span className="text-danger">{errors.email}</span>
+              <span className='text-danger'>{errors.email}</span>
             </div>
           </div>
           <div>
             <label>Mobile:</label>
             <input
-              name="mobile"
+              name='mobile'
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="mobile"
+              placeholder='mobile'
             />
             <div>
-              <span className="text-danger">{errors.mobile}</span>
+              <span className='text-danger'>{errors.mobile}</span>
             </div>
           </div>
           <div>
             <label>Password:</label>
             <input
-              type="Password"
-              name="password"
+              type='Password'
+              name='password'
               value={fields.password}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="Password"
+              placeholder='Password'
             />
             <div>
-              <span className="text-danger">{errors.password}</span>
+              <span className='text-danger'>{errors.password}</span>
             </div>
           </div>
           <div>
             <label>Confirm Password:</label>
             <input
-              type="Password"
-              name="confirmPassword"
+              type='Password'
+              name='confirmPassword'
               value={fields.confirmPassword}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="confirm Password"
+              placeholder='confirm Password'
             />
             <div>
-              <span className="text-danger">{errors.confirmPassword}</span>
+              <span className='text-danger'>{errors.confirmPassword}</span>
             </div>
           </div>
         </div>
         <br />
         <button
-          type="button"
-          className="login-button pointer"
+          type='button'
+          className='login-button pointer'
           onClick={this.handleSubmit}
           disabled={
             Object.values(errors).some((el) => el.length > 0) ? true : false
