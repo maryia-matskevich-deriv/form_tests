@@ -3,7 +3,7 @@ import React from "react";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 class validationInReact extends React.Component {
@@ -15,15 +15,15 @@ class validationInReact extends React.Component {
         email: "",
         password: "",
         confirmPassword: "",
-        mobile: ""
+        mobile: "",
       },
       errors: {
         firstName: "",
         email: "",
         password: "",
         mobile: "",
-        confirmPassword: ""
-      }
+        confirmPassword: "",
+      },
     };
   }
 
@@ -86,12 +86,12 @@ class validationInReact extends React.Component {
     this.setState({
       errors: {
         ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value)
+        [e.target.name]: this.validate(e.target.name, e.target.value),
       },
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -114,7 +114,7 @@ class validationInReact extends React.Component {
         firstName: fields.firstName,
         email: fields.email,
         password: fields.password,
-        mobile: fields.mobile
+        mobile: fields.mobile,
       };
       window.alert("subit success", JSON.stringify(data));
     }
@@ -124,13 +124,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
               <div>
                 <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <select name="gender" id="gender_list">
                   <option value="select" checked>
                     select
                   </option>
