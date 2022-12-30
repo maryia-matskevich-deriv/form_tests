@@ -124,7 +124,7 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
@@ -170,7 +170,7 @@ class validationInReact extends React.Component {
               name="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="mobile"
+              placeholder="Mobile"
             />
             <div>
               <span className="text-danger">{errors.mobile}</span>
@@ -196,7 +196,7 @@ class validationInReact extends React.Component {
               name="confirmPassword"
               value={fields.confirmPassword}
               onChange={(event) => this.handleUserInput(event)}
-              placeholder="confirm Password"
+              placeholder="Confirm Password"
             />
             <div>
               <span className="text-danger">{errors.confirmPassword}</span>
