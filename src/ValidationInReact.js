@@ -124,13 +124,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
               <div>
                 <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <select data-testid="gender_list" name="gender" id="gender_list">
                   <option value="select" checked>
                     select
                   </option>
@@ -204,10 +204,12 @@ class validationInReact extends React.Component {
           </div>
         </div>
         <br />
+        {JSON.stringify(errors, null, 2)}
         <button
+          data-testid="submitButton"
           type="button"
           className="login-button pointer"
-          onClick={this.handleSubmit}
+          onClick={this.props.mockOnClick || this.handleSubmit}
           disabled={
             Object.values(errors).some((el) => el.length > 0) ? true : false
           }
