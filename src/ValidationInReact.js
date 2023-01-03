@@ -3,7 +3,7 @@ import React from "react";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 class validationInReact extends React.Component {
@@ -15,15 +15,15 @@ class validationInReact extends React.Component {
         email: "",
         password: "",
         confirmPassword: "",
-        mobile: ""
+        mobile: "",
       },
       errors: {
         firstName: "",
         email: "",
         password: "",
         mobile: "",
-        confirmPassword: ""
-      }
+        confirmPassword: "",
+      },
     };
   }
 
@@ -86,12 +86,12 @@ class validationInReact extends React.Component {
     this.setState({
       errors: {
         ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value)
+        [e.target.name]: this.validate(e.target.name, e.target.value),
       },
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -114,7 +114,7 @@ class validationInReact extends React.Component {
         firstName: fields.firstName,
         email: fields.email,
         password: fields.password,
-        mobile: fields.mobile
+        mobile: fields.mobile,
       };
       window.alert("subit success", JSON.stringify(data));
     }
@@ -124,13 +124,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form aria-label="form" className="contacts_form">
         <div className="border">
           <div>
             <div>
               <div>
                 <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <select name="gender" id="gender_list">
                   <option value="select" checked>
                     select
                   </option>
@@ -138,8 +138,9 @@ class validationInReact extends React.Component {
                   <option value="female">female</option>
                 </select>
               </div>
-              <label>First name:</label>
+              <label htmlFor="first_name">First name:</label>
               <input
+                id="first_name"
                 type="text"
                 name="firstName"
                 value={fields.firstName}
@@ -152,8 +153,9 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
+              id="email"
               type="email"
               name="email"
               value={fields.email}
@@ -165,8 +167,9 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Mobile:</label>
+            <label htmlFor="mobile">Mobile:</label>
             <input
+              id="mobile"
               name="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
@@ -177,8 +180,9 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Password:</label>
+            <label htmlFor="password">Password:</label>
             <input
+              id="password"
               type="Password"
               name="password"
               value={fields.password}
@@ -190,8 +194,9 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Confirm Password:</label>
+            <label htmlFor="confirm_password">Confirm Password:</label>
             <input
+              id="confirm_password"
               type="Password"
               name="confirmPassword"
               value={fields.confirmPassword}
