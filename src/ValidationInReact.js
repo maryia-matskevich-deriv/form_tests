@@ -3,7 +3,7 @@ import React from "react";
 const options = [
   { value: "chocolate", label: "Chocolate" },
   { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
+  { value: "vanilla", label: "Vanilla" },
 ];
 
 class validationInReact extends React.Component {
@@ -15,15 +15,15 @@ class validationInReact extends React.Component {
         email: "",
         password: "",
         confirmPassword: "",
-        mobile: ""
+        mobile: "",
       },
       errors: {
         firstName: "",
         email: "",
         password: "",
         mobile: "",
-        confirmPassword: ""
-      }
+        confirmPassword: "",
+      },
     };
   }
 
@@ -86,12 +86,12 @@ class validationInReact extends React.Component {
     this.setState({
       errors: {
         ...this.state.errors,
-        [e.target.name]: this.validate(e.target.name, e.target.value)
+        [e.target.name]: this.validate(e.target.name, e.target.value),
       },
       fields: {
         ...this.state.fields,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -114,7 +114,7 @@ class validationInReact extends React.Component {
         firstName: fields.firstName,
         email: fields.email,
         password: fields.password,
-        mobile: fields.mobile
+        mobile: fields.mobile,
       };
       window.alert("subit success", JSON.stringify(data));
     }
@@ -124,13 +124,13 @@ class validationInReact extends React.Component {
     const { fields, errors } = this.state;
 
     return (
-      <form className="contacts_form">
+      <form className="contacts_form" aria-label="form">
         <div className="border">
           <div>
             <div>
               <div>
-                <label htmlFor="gender_list">Choose a gender:</label>
-                <select name="gender" id="cars">
+                <label htmlFor="gender_options">Choose a gender:</label>
+                <select name="gender" id="gender_options">
                   <option value="select" checked>
                     select
                   </option>
@@ -138,9 +138,10 @@ class validationInReact extends React.Component {
                   <option value="female">female</option>
                 </select>
               </div>
-              <label>First name:</label>
+              <label htmlFor="first_name">First name:</label>
               <input
                 type="text"
+                id="first_name"
                 name="firstName"
                 value={fields.firstName}
                 onChange={(event) => this.handleUserInput(event)}
@@ -152,9 +153,10 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="email"
+              id="email"
               name="email"
               value={fields.email}
               onChange={(event) => this.handleUserInput(event)}
@@ -165,9 +167,10 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Mobile:</label>
+            <label htmlFor="mobile">Mobile:</label>
             <input
               name="mobile"
+              id="mobile"
               value={fields.mobile}
               onChange={(event) => this.handleUserInput(event)}
               placeholder="mobile"
@@ -177,9 +180,10 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Password:</label>
+            <label htmlFor="password">Password:</label>
             <input
               type="Password"
+              id="password"
               name="password"
               value={fields.password}
               onChange={(event) => this.handleUserInput(event)}
@@ -190,9 +194,10 @@ class validationInReact extends React.Component {
             </div>
           </div>
           <div>
-            <label>Confirm Password:</label>
+            <label htmlFor="confirm_password">Confirm Password:</label>
             <input
               type="Password"
+              id="confirm_password"
               name="confirmPassword"
               value={fields.confirmPassword}
               onChange={(event) => this.handleUserInput(event)}
