@@ -6,7 +6,9 @@ import App from "../App";
 
 describe("Tasks", () => {
   it("Select the option and check that option 'male' was selected", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    userEvent.selectOptions(screen.getByRole("combobox"), ["male"]);
+    expect(screen.getByRole("option", { name: "male" }).selected).toBe(true);
   });
 
   it("Check that the user has filled the form except of gender select", () => {
@@ -14,7 +16,10 @@ describe("Tasks", () => {
   });
 
   it("Check that the field 'First Name' was focused and filled with min 2 letters", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    userEvent.type(screen.getByPlaceholderText(/First name/i), "Ali");
+    expect(screen.getByPlaceholderText(/First name/i)).toHaveFocus();
+    expect(screen.getByPlaceholderText(/First name/i).value.length).toBeGreaterThanOrEqual(2);
   });
 
   it("Check that the button submit was clicked", () => {
@@ -22,26 +27,50 @@ describe("Tasks", () => {
   });
 
   it("Check that the form has a class", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    expect(screen.getByRole("form")).toHaveClass("contacts_form");
   });
 
   it("Check that the labels of the form have a content", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    expect(screen.getByText("First name:")).toBeInTheDocument();
+    expect(screen.getByText("Email:")).toBeInTheDocument();
+    expect(screen.getByText("Mobile:")).toBeInTheDocument();
+    expect(screen.getByText("Password:")).toBeInTheDocument();
+    expect(screen.getByText("Confirm Password:")).toBeInTheDocument();
   });
 
   it("Check that the user can open a list of the gender and doesn't choose anything", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    userEvent.selectOptions(screen.getByRole("combobox"), ["select"]);
+    expect(screen.getByRole("option", { name: "select" }).selected).toBe(true);
   });
 
-  it("Check that the user can't to submit until fields will be correct filled", () => {
-    expect(true).toBe(true);
+  it("Check that the user can't to submit until fields will be correct filled", async () => {
+    render(<App />);
+    const fname = screen.getByPlaceholderText("First Name");
+    await userEvent.type(fname, "a");
+    expect(screen.getByRole("button", { name: "Submit" })).toBeDisabled();
   });
 
   it("Check that the field 'Email' should have correct validation, haven't error message", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    const button = screen.getByRole("button", { name: "Submit" });
+    userEvent.click(button);
+    expect(screen.getByText("Email is Required")).toBeInTheDocument();
+    userEvent.type(screen.getByPlaceholderText("Email Address"), "ali");
+    expect(screen.getByText("Enter a valid email address")).toBeInTheDocument();
   });
 
   it("Check that all fields on the first render should be empty", () => {
-    expect(true).toBe(true);
+    render(<App />);
+    let formObj = {
+      firstName: "",
+      email: "",
+      mobile: "",
+      password: "",
+      confirmPassword: "",
+    }
+    expect(screen.getByRole("form")).toHaveFormValues(formObj);
   });
 });
